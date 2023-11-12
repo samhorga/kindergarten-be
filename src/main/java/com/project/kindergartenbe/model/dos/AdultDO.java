@@ -1,4 +1,4 @@
-package com.project.kindergartenbe.model;
+package com.project.kindergartenbe.model.dos;
 
 import lombok.Getter;
 import lombok.Setter;
