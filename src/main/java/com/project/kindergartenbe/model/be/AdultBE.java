@@ -37,6 +37,7 @@ public class AdultBE extends BaseBE {
 
     @OneToMany(mappedBy = "adult", cascade = CascadeType.ALL, orphanRemoval = false)
     private List<StudentBE> students = new ArrayList<>();
+
 }
 
 

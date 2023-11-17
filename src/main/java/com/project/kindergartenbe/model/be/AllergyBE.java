@@ -1,5 +1,6 @@
 package com.project.kindergartenbe.model.be;
 
+import com.project.kindergartenbe.model.dos.AllergyDO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,4 +22,13 @@ public class AllergyBE extends BaseBE {
 
     @Column(name = "added_by")
     private String addedBy;
+
+    public AllergyBE (AllergyDO allergyDO) {
+        this.allergyName = allergyDO.getAllergyName();
+        this.setCreatedDate(allergyDO.getCreatedDate());
+        this.setEditedDate(allergyDO.getEditedDate());
+        this.setCreatedBy(allergyDO.getCreatedBy());
+        this.setLastEditedBy(allergyDO.getLastEditedBy());
+        this.setEditedDate(allergyDO.getEditedDate());
+    }
 }

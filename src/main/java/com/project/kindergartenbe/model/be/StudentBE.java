@@ -1,10 +1,15 @@
 package com.project.kindergartenbe.model.be;
 
+import com.project.kindergartenbe.model.dos.AllergyDO;
+import com.project.kindergartenbe.model.dos.NoteDO;
+import com.project.kindergartenbe.model.dos.StudentDO;
+import com.project.kindergartenbe.model.dos.VaccineDO;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "students") // Define the table name
@@ -46,4 +51,32 @@ public class StudentBE extends BaseBE {
             inverseJoinColumns = @JoinColumn(name = "adult_id")
     )
     private List<AdultBE> adults;
+
+    public StudentBE(StudentDO studentDO) {
+        this.firstName = studentDO.getFirstName();
+        this.lastName = studentDO.getLastName();
+        this.classroom = studentDO.getClassroom();
+        this.schedule = studentDO.getSchedule();
+        this.dateOfBirth = studentDO.getDateOfBirth();
+        this.notes = mapNotes(studentDO.getNotes());
+        this.allergies = mapAllergies(studentDO.getAllergies());
+    }
+
+    private List<NoteBE> mapNotes(List<NoteDO> noteDOList) {
+        return noteDOList.stream()
+                .map(NoteBE::new) // Assuming NoteBE has a constructor that takes NoteDO
+                .collect(Collectors.toList());
+    }
+
+    private List<AllergyBE> mapAllergies(List<AllergyDO> allergyDOList) {
+        return allergyDOList.stream()
+                .map(AllergyBE::new) // Assuming NoteBE has a constructor that takes NoteDO
+                .collect(Collectors.toList());
+    }
+
+    private List<VaccineBE> mapVaccines(List<VaccineDO> vaccineDOList) {
+        return vaccineDOList.stream()
+                .map(VaccineBE::new) // Assuming NoteBE has a constructor that takes NoteDO
+                .collect(Collectors.toList());
+    }
 }

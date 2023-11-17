@@ -1,5 +1,6 @@
 package com.project.kindergartenbe.model.be;
 
+import com.project.kindergartenbe.model.dos.NoteDO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,4 +16,8 @@ public class NoteBE extends BaseBE {
 
     @Column(name = "note_text")
     private String note;
+
+    public NoteBE(NoteDO noteDO) {
+        this.note = noteDO.getNote();
+    }
 }
