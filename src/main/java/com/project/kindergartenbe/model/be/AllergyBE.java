@@ -2,6 +2,7 @@ package com.project.kindergartenbe.model.be;
 
 import com.project.kindergartenbe.model.dos.AllergyDO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "allergies") // Define the table name
 @Getter
 @Setter
+@NoArgsConstructor
 public class AllergyBE extends BaseBE {
 
     @Id
@@ -22,6 +24,10 @@ public class AllergyBE extends BaseBE {
 
     @Column(name = "added_by")
     private String addedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentBE student;
 
     public AllergyBE (AllergyDO allergyDO) {
         this.allergyName = allergyDO.getAllergyName();

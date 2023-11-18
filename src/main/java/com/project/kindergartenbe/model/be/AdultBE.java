@@ -1,6 +1,7 @@
 package com.project.kindergartenbe.model.be;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "adults") // Define the table name
 @Getter
 @Setter
+@NoArgsConstructor
 public class AdultBE extends BaseBE {
 
     @Id
@@ -35,7 +37,7 @@ public class AdultBE extends BaseBE {
     @Column(name = "is_primary")
     private Boolean primary;
 
-    @OneToMany(mappedBy = "adult", cascade = CascadeType.ALL, orphanRemoval = false)
+    @ManyToMany(mappedBy = "adults")
     private List<StudentBE> students = new ArrayList<>();
 
 }

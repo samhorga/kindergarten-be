@@ -2,8 +2,7 @@ package com.project.kindergartenbe.model.be;
 
 import com.project.kindergartenbe.model.dos.AllergyDO;
 import com.project.kindergartenbe.model.dos.VaccineDO;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,7 @@ import java.util.stream.Collectors;
 @Table(name = "vaccines") // Define the table name
 @Getter
 @Setter
+@NoArgsConstructor
 public class VaccineBE extends BaseBE {
 
     @Id
@@ -31,14 +31,14 @@ public class VaccineBE extends BaseBE {
     @Column(name = "vaccine_date")
     private String vaccineDate;
 
-    @ManyToMany(mappedBy = "vaccines")
-    private List<StudentBE> students;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentBE student;
 
     public VaccineBE (VaccineDO vaccineDO) {
         this.vaccineName = vaccineDO.getVaccineName();
         this.vaccineDoses = vaccineDO.getVaccineDoses();
         this.vaccineDate = vaccineDO.getVaccineDate();
-        this.students = vaccineDO.getStudents().stream().map(StudentBE::new).collect(Collectors.toList());
         this.setCreatedDate(vaccineDO.getCreatedDate());
         this.setEditedDate(vaccineDO.getEditedDate());
         this.setCreatedBy(vaccineDO.getCreatedBy());

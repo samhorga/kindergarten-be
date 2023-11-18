@@ -5,9 +5,11 @@ import com.project.kindergartenbe.model.dos.NoteDO;
 import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.model.dos.VaccineDO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @Table(name = "students") // Define the table name
 @Getter
 @Setter
+@NoArgsConstructor
 public class StudentBE extends BaseBE {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +39,13 @@ public class StudentBE extends BaseBE {
     private String dateOfBirth;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<NoteBE> notes;
+    private List<NoteBE> notes = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AllergyBE> allergies;
+    private List<AllergyBE> allergies = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<VaccineBE> vaccines;
+    private List<VaccineBE> vaccines = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -50,7 +53,7 @@ public class StudentBE extends BaseBE {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "adult_id")
     )
-    private List<AdultBE> adults;
+    private List<AdultBE> adults = new ArrayList<>();
 
     public StudentBE(StudentDO studentDO) {
         this.firstName = studentDO.getFirstName();
