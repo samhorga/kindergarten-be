@@ -1,12 +1,13 @@
 package com.project.kindergartenbe.controllers;
 
-import com.fasterxml.jackson.databind.util.ExceptionUtil;
 import com.project.kindergartenbe.model.BaseResponse;
 import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.services.StudentService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @RequestMapping("/create")
+    @PostMapping("/create")
     public ResponseEntity<BaseResponse<String>> createStudent(@RequestBody StudentDO studentDO) {
         BaseResponse<String> response = new BaseResponse<>();
         try {
