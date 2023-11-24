@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
@@ -59,10 +60,10 @@ public class StudentBE extends BaseBE {
         this.firstName = studentDO.getFirstName();
         this.lastName = studentDO.getLastName();
         this.classroom = studentDO.getClassroom();
-        this.schedule = studentDO.getSchedule();
-        this.dateOfBirth = studentDO.getDateOfBirth();
-        this.notes = mapNotes(studentDO.getNotes());
-        this.allergies = mapAllergies(studentDO.getAllergies());
+        this.schedule = studentDO.getSchedule() ;
+        this.dateOfBirth = Objects.nonNull(studentDO.getDateOfBirth()) ? studentDO.getDateOfBirth() : null;
+        this.notes = Objects.nonNull(studentDO.getNotes()) ? mapNotes(studentDO.getNotes()) : null;
+        this.allergies = Objects.nonNull(studentDO.getNotes()) ? mapAllergies(studentDO.getAllergies()) : null;;
     }
 
     private List<NoteBE> mapNotes(List<NoteDO> noteDOList) {
