@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Entity
@@ -30,11 +31,10 @@ public class AllergyBE extends BaseBE {
     private StudentBE student;
 
     public AllergyBE (AllergyDO allergyDO) {
-        this.allergyName = allergyDO.getAllergyName();
-        this.setCreatedDate(allergyDO.getCreatedDate());
-        this.setEditedDate(allergyDO.getEditedDate());
-        this.setCreatedBy(allergyDO.getCreatedBy());
-        this.setLastEditedBy(allergyDO.getLastEditedBy());
-        this.setEditedDate(allergyDO.getEditedDate());
+        this.allergyName = Objects.nonNull(allergyDO.getAllergyName()) ? allergyDO.getAllergyName() : null;
+        this.createdDate = Objects.nonNull(allergyDO.getCreatedDate()) ? allergyDO.getCreatedDate() : null;
+        this.editedDate = Objects.nonNull(allergyDO.getEditedDate()) ? allergyDO.getEditedDate() : null;
+        this.lastEditedBy = Objects.nonNull(allergyDO.getLastEditedBy()) ? allergyDO.getLastEditedBy() : null;
+        this.createdBy = Objects.nonNull(allergyDO.getCreatedBy()) ? allergyDO.getCreatedBy() : null;
     }
 }

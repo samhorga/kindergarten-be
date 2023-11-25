@@ -6,6 +6,8 @@ import com.project.kindergartenbe.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class StudentService {
@@ -24,5 +26,14 @@ public class StudentService {
         studentBE.setCreatedBy("SAMUEL HORGA");
         studentBE.setLastEditedBy("SAMUEL HORGA");
         this.studentRepository.save(studentBE);
+    }
+
+    public List<StudentDO> retrieveStudents() {
+        List<StudentBE> foundStudents = this.studentRepository.findAll();
+        List<StudentDO> studentListTOBeReturned = new ArrayList<>();
+
+        foundStudents.forEach(studentBE -> studentListTOBeReturned.add(new StudentDO(studentBE)));
+
+        return studentListTOBeReturned;
     }
 }

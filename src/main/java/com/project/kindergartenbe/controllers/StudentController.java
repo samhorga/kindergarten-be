@@ -7,10 +7,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -34,6 +33,23 @@ public class StudentController {
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("Exception during adding the student: " + ExceptionUtils.getStackTrace(e));
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/retrieveAllStudents")
+    public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveAllStudents() {
+        BaseResponse<List<StudentDO>> response = new BaseResponse<>();
+        try {
+            // Your business logic to fetch or process data
+            List<StudentDO> studentDOList = studentService.retrieveStudents();
+            response.setSuccess(true);
+            response.setMessage("Students retrieved successfully.");
+            response.setData(studentDOList);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            response.setSuccess(false);
+            response.setMessage("Error occurred while retrieving students.");
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

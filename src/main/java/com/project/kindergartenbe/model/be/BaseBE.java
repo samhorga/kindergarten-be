@@ -15,14 +15,14 @@ import javax.persistence.MappedSuperclass;
 public class BaseBE {
 
     @Column(name = "created_date")
-    private String createdDate;
+    public String createdDate;
 
     @Column(name = "edited_date")
-    private String editedDate;
+    public String editedDate;
 
     @Column(name = "last_edited_by")
-    private String lastEditedBy;
+    public String lastEditedBy;
 
     @Column(name = "created_by")
-    private String createdBy;
+    public String createdBy;
 }

@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -45,8 +43,13 @@ public class StudentBE extends BaseBE {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AllergyBE> allergies = new ArrayList<>();
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<VaccineBE> vaccines = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "student_vaccine",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "vaccine_id")
+    )
+    private Set<VaccineBE> vaccines = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -64,6 +67,7 @@ public class StudentBE extends BaseBE {
         this.dateOfBirth = Objects.nonNull(studentDO.getDateOfBirth()) ? studentDO.getDateOfBirth() : null;
         this.notes = Objects.nonNull(studentDO.getNotes()) ? mapNotes(studentDO.getNotes()) : null;
         this.allergies = Objects.nonNull(studentDO.getNotes()) ? mapAllergies(studentDO.getAllergies()) : null;;
+        this.vaccines = Objects.nonNull(studentDO.getVaccines()) ? mapVaccines(studentDO.getVaccines()) : null;;
     }
 
     private List<NoteBE> mapNotes(List<NoteDO> noteDOList) {
@@ -78,9 +82,9 @@ public class StudentBE extends BaseBE {
                 .collect(Collectors.toList());
     }
 
-    private List<VaccineBE> mapVaccines(List<VaccineDO> vaccineDOList) {
+    private Set<VaccineBE> mapVaccines(Set<VaccineDO> vaccineDOList) {
         return vaccineDOList.stream()
                 .map(VaccineBE::new) // Assuming NoteBE has a constructor that takes NoteDO
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 }
