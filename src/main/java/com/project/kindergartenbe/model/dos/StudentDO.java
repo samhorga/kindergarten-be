@@ -1,9 +1,6 @@
 package com.project.kindergartenbe.model.dos;
 
-import com.project.kindergartenbe.model.be.AllergyBE;
-import com.project.kindergartenbe.model.be.NoteBE;
-import com.project.kindergartenbe.model.be.StudentBE;
-import com.project.kindergartenbe.model.be.VaccineBE;
+import com.project.kindergartenbe.model.be.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -38,6 +35,13 @@ public class StudentDO extends BaseDO {
         this.notes = Objects.nonNull(studentBE.getNotes()) ? mapNotes(studentBE.getNotes()) : null;
         this.allergies = Objects.nonNull(studentBE.getNotes()) ? mapAllergies(studentBE.getAllergies()) : null;;
         this.vaccines = Objects.nonNull(studentBE.getVaccines()) ? mapVaccines(studentBE.getVaccines()) : null;;
+        this.adults = Objects.nonNull(studentBE.getVaccines()) ? mapAdults(studentBE.getAdults()) : null;;
+    }
+
+    private List<AdultDO> mapAdults(List<AdultBE> adults) {
+        return adults.stream()
+                .map(AdultDO::new) // Assuming NoteBE has a constructor that takes NoteDO
+                .collect(Collectors.toList());
     }
 
     private List<NoteDO> mapNotes(List<NoteBE> noteBEList) {
