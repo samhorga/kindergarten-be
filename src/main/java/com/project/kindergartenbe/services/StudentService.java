@@ -36,4 +36,10 @@ public class StudentService {
 
         return studentListTOBeReturned;
     }
+
+    public void deleteStudent(Long id) {
+        StudentBE studentBETobeDeleted = studentRepository.findById(id).orElseThrow();
+
+        studentRepository.delete(studentBETobeDeleted);
+    }
 }

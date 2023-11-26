@@ -33,9 +33,10 @@ public class StudentController {
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("Exception during adding the student: " + ExceptionUtils.getStackTrace(e));
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
+
     @GetMapping("/retrieveAllStudents")
     public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveAllStudents() {
         BaseResponse<List<StudentDO>> response = new BaseResponse<>();
@@ -50,7 +51,22 @@ public class StudentController {
             // Log the exception for debugging purposes
             response.setSuccess(false);
             response.setMessage("Error occurred while retrieving students.");
-            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
+        }
+    }
+
+    @DeleteMapping("/deleteStudent/{id}")
+    public ResponseEntity<BaseResponse<String>> deleteStudent(@PathVariable Long id) {
+        BaseResponse<String> response = new BaseResponse<>();
+        try {
+            studentService.deleteStudent(id);
+            response.setSuccess(true);
+            response.setMessage("Student deleted successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while deleting student.");
+            throw e;
         }
     }
 }
