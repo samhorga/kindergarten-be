@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class StudentDO extends BaseDO {
+    private Long id;
     private String firstName;
     private String lastName;
     private String classroom;
@@ -27,6 +28,7 @@ public class StudentDO extends BaseDO {
     private Set<StudentBE> students = new HashSet<>();
 
     public StudentDO(StudentBE studentBE) {
+        this.id = studentBE.getId();
         this.firstName = studentBE.getFirstName();
         this.lastName = studentBE.getLastName();
         this.classroom = studentBE.getClassroom();
