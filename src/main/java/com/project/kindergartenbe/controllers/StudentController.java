@@ -69,4 +69,19 @@ public class StudentController {
             throw e;
         }
     }
+
+    @PostMapping("/edit")
+    public ResponseEntity<BaseResponse<String>> editStudent(@RequestBody StudentDO studentDO) {
+        BaseResponse<String> response = new BaseResponse<>();
+        try {
+            studentService.editStudent(studentDO);
+            response.setSuccess(true);
+            response.setMessage("Student edited successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while editing student.");
+            throw e;
+        }
+    }
 }
