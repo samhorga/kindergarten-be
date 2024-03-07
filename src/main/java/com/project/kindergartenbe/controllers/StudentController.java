@@ -71,13 +71,14 @@ public class StudentController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<BaseResponse<String>> editStudent(@RequestBody StudentDO studentDO) {
-        BaseResponse<String> response = new BaseResponse<>();
+    public ResponseEntity<BaseResponse<StudentDO>> editStudent(@RequestBody StudentDO studentDO) {
+        BaseResponse<StudentDO> response = new BaseResponse<>();
         try {
-            studentService.editStudent(studentDO);
+            StudentDO editedStudent = studentService.editStudent(studentDO);
+            response.setData(editedStudent);
             response.setSuccess(true);
             response.setMessage("Student edited successfully.");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return  ResponseEntity.ok(response);
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("Error occurred while editing student.");

@@ -49,12 +49,12 @@ public class StudentService {
         studentRepository.delete(studentBETobeDeleted);
     }
 
-    public void editStudent(StudentDO studentDO) {
+    public StudentDO editStudent(StudentDO studentDO) {
         StudentBE foundStudent = studentRepository.findById(studentDO.getId()).orElseThrow();
 
         StudentBE updatedStudentBE = convertToBusinessEntity(foundStudent, studentDO);
 
-        studentRepository.save(updatedStudentBE);
+        return new StudentDO(studentRepository.save(updatedStudentBE));
     }
 
     private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {

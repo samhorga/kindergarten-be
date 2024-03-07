@@ -37,10 +37,10 @@ public class StudentBE extends BaseBE {
     @Column(name = "date_of_birth")
     private String dateOfBirth;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<NoteBE> notes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<AllergyBE> allergies = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
