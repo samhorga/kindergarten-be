@@ -59,10 +59,9 @@ public class NoteService {
         return studentListTOBeReturned;
     }
 
-    public void deleteStudentNote(Long studentId, Long note) {
-//        StudentBE studentBETobeDeleted = studentRepository.findById(id).orElseThrow();
-
-//        studentRepository.delete(studentBETobeDeleted);
+    public void deleteStudentNote(Long note) {
+        NoteBE noteBE = noteRepository.findById(note).orElseThrow();
+        noteRepository.delete(noteBE);
     }
 
     public StudentDO editNote(Long noteId) {

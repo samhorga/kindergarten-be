@@ -10,10 +10,12 @@ import java.util.Objects;
 @Setter
 public class NoteDO extends BaseDO {
     private String note;
+    private Long id;
 
     public NoteDO() {}
 
     public NoteDO(NoteBE noteBE) {
+        this.id = noteBE.getId();
         this.note = Objects.nonNull(noteBE.getNote()) ? noteBE.getNote() : null;
         this.createdDate = Objects.nonNull(noteBE.getCreatedDate()) ? noteBE.getCreatedDate() : null;
         this.editedDate = Objects.nonNull(noteBE.getEditedDate()) ? noteBE.getEditedDate() : null;

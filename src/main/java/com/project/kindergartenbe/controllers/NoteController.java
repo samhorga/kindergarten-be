@@ -2,14 +2,11 @@ package com.project.kindergartenbe.controllers;
 
 import com.project.kindergartenbe.model.BaseResponse;
 import com.project.kindergartenbe.model.dos.NoteDO;
-import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.services.NoteService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/note")
@@ -37,29 +34,11 @@ public class NoteController {
         }
     }
 
-    @GetMapping("/retrieveStudentNotes/{studentId}")
-    public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveStudentNotes(@PathVariable String studentId) {
-        BaseResponse<List<StudentDO>> response = new BaseResponse<>();
-        try {
-            // Your business logic to fetch or process data
-//            List<StudentDO> studentDOList = studentService.retrieveStudents();
-//            response.setSuccess(true);
-//            response.setMessage("Notes retrieved successfully.");
-//            response.setData(studentDOList);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            // Log the exception for debugging purposes
-            response.setSuccess(false);
-            response.setMessage("Error occurred while retrieving notes.");
-            throw e;
-        }
-    }
-
-    @DeleteMapping("/delete/{noteId}/{studentId}")
-    public ResponseEntity<BaseResponse<String>> deleteNote(@PathVariable Long noteId, @PathVariable Long studentId) {
+    @DeleteMapping("/delete/{noteId}")
+    public ResponseEntity<BaseResponse<String>> deleteNote(@PathVariable Long noteId) {
         BaseResponse<String> response = new BaseResponse<>();
         try {
-//            studentService.deleteStudent(id);
+            noteService.deleteStudentNote(noteId);
             response.setSuccess(true);
             response.setMessage("Note deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
