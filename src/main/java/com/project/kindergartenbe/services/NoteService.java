@@ -64,14 +64,15 @@ public class NoteService {
         noteRepository.delete(noteBE);
     }
 
-    public StudentDO editNote(Long noteId) {
-//        StudentBE foundStudent = studentRepository.findById(studentDO.getId()).orElseThrow();
-//
-//        StudentBE updatedStudentBE = convertToBusinessEntity(foundStudent, studentDO);
-//
-//        return new StudentDO(studentRepository.save(updatedStudentBE));
+    public NoteDO editNote(NoteDO noteDO) {
+        Optional<NoteBE> optionalNote = noteRepository.findById(noteDO.getId());
 
-        return null;
+        optionalNote.ifPresentOrElse(
+                this.noteRepository::save,
+                () -> {
+                    throw new RuntimeException("Note not found with id: " + noteDO.getId());
+                });
+        return new NoteDO(optionalNote.get());
     }
 
 //    private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {

@@ -50,11 +50,11 @@ public class NoteController {
     }
 
     @PostMapping("/edit")
-    public ResponseEntity<BaseResponse<NoteDO>> editNote(@RequestBody NoteDO noteDO, @PathVariable Long studentID) {
+    public ResponseEntity<BaseResponse<NoteDO>> editNote(@RequestBody NoteDO noteDO) {
         BaseResponse<NoteDO> response = new BaseResponse<>();
         try {
-//            StudentDO editedStudent = studentService.editStudent(studentDO);
-            response.setData(null);
+            NoteDO editedNote = noteService.editNote(noteDO);
+            response.setData(editedNote);
             response.setSuccess(true);
             response.setMessage("Note edited successfully.");
             return  ResponseEntity.ok(response);
