@@ -22,10 +22,11 @@ public class NoteController {
     }
 
     @PostMapping("/create/{studentId}")
-    public ResponseEntity<BaseResponse<String>> createNote(@RequestBody NoteDO noteDO, @PathVariable Long studentId) {
-        BaseResponse<String> response = new BaseResponse<>();
+    public ResponseEntity<BaseResponse<NoteDO>> createNote(@RequestBody NoteDO noteDO, @PathVariable Long studentId) {
+        BaseResponse<NoteDO> response = new BaseResponse<>();
         try {
-            noteService.createNote(noteDO, studentId);
+            NoteDO savedNote = noteService.createNote(noteDO, studentId);
+            response.setData(savedNote);
             response.setSuccess(true);
             response.setMessage("Note added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);

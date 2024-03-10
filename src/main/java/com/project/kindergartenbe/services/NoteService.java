@@ -29,7 +29,7 @@ public class NoteService {
     }
 
 
-    public void createNote(NoteDO noteDO, Long studentID) {
+    public NoteDO createNote(NoteDO noteDO, Long studentID) {
         NoteBE noteBE = new NoteBE(noteDO);
 
         noteBE.setCreatedDate(LocalDate.now().toString());
@@ -47,6 +47,7 @@ public class NoteService {
                 () -> {
                     throw new RuntimeException("Student not found with id: " + studentID);
                 });
+        return new NoteDO(noteBE);
     }
 
     public List<StudentDO> retrieveStudentNotes(Long studentId) {
