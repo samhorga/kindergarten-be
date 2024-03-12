@@ -29,6 +29,8 @@ public class StudentDO extends BaseDO {
 
     public StudentDO(StudentBE studentBE) {
         this.id = studentBE.getId();
+        this.createdDate = studentBE.getCreatedDate();
+        this.editedDate = studentBE.getEditedDate();
         this.firstName = studentBE.getFirstName();
         this.lastName = studentBE.getLastName();
         this.classroom = studentBE.getClassroom();

@@ -1,18 +1,12 @@
 package com.project.kindergartenbe.services;
 
-import com.project.kindergartenbe.mappers.CommonMapper;
 import com.project.kindergartenbe.model.be.NoteBE;
 import com.project.kindergartenbe.model.be.StudentBE;
 import com.project.kindergartenbe.model.dos.NoteDO;
-import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.repositories.NoteRepository;
 import com.project.kindergartenbe.repositories.StudentRepository;
-import com.project.kindergartenbe.util.CommonUtil;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -32,8 +26,8 @@ public class NoteService {
     public NoteDO createNote(NoteDO noteDO, Long studentID) {
         NoteBE noteBE = new NoteBE(noteDO);
 
-        noteBE.setCreatedDate(LocalDate.now().toString());
-        noteBE.setEditedDate(LocalDate.now().toString());
+        noteBE.setCreatedDate(LocalDateTime.now().toString());
+        noteBE.setEditedDate(LocalDateTime.now().toString());
         noteBE.setCreatedBy("SAMUEL HORGA");
         noteBE.setLastEditedBy("SAMUEL HORGA");
 
@@ -61,7 +55,7 @@ public class NoteService {
         optionalNote.ifPresentOrElse(
                noteBE -> {
                    noteBE.setNote(noteDO.getNote());
-                   noteBE.setEditedDate(LocalDate.now().toString());
+                   noteBE.setEditedDate(LocalDateTime.now().toString());
                    noteBE.setLastEditedBy("GUESS WHO");
                    noteRepository.save(noteBE);
                },
