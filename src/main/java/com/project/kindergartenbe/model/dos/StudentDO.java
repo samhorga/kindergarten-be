@@ -4,11 +4,9 @@ import com.project.kindergartenbe.model.be.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.util.CollectionUtils;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Getter
@@ -43,26 +41,38 @@ public class StudentDO extends BaseDO {
     }
 
     private List<AdultDO> mapAdults(List<AdultBE> adults) {
-        return adults.stream()
-                .map(AdultDO::new) // Assuming NoteBE has a constructor that takes NoteDO
-                .collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(adults)) {
+            return adults.stream()
+                    .map(AdultDO::new) // Assuming NoteBE has a constructor that takes NoteDO
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     private List<NoteDO> mapNotes(List<NoteBE> noteBEList) {
-        return noteBEList.stream()
-                .map(NoteDO::new) // Assuming NoteBE has a constructor that takes NoteDO
-                .collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(noteBEList)) {
+            return noteBEList.stream()
+                    .map(NoteDO::new) // Assuming NoteBE has a constructor that takes NoteDO
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     private List<AllergyDO> mapAllergies(List<AllergyBE> allergyBES) {
-        return allergyBES.stream()
-                .map(AllergyDO::new) // Assuming NoteBE has a constructor that takes NoteDO
-                .collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(allergyBES)) {
+            return allergyBES.stream()
+                    .map(AllergyDO::new) // Assuming NoteBE has a constructor that takes NoteDO
+                    .collect(Collectors.toList());
+        }
+        return Collections.emptyList();
     }
 
     private Set<VaccineDO> mapVaccines(Set<VaccineBE> vaccineBES) {
-        return vaccineBES.stream()
-                .map(VaccineDO::new) // Assuming NoteBE has a constructor that takes NoteDO
-                .collect(Collectors.toSet());
+        if(!CollectionUtils.isEmpty(vaccineBES)) {
+            return vaccineBES.stream()
+                    .map(VaccineDO::new) // Assuming NoteBE has a constructor that takes NoteDO
+                    .collect(Collectors.toSet());
+        }
+        return Collections.emptySet();
     }
 }
