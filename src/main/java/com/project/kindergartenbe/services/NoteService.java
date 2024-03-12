@@ -50,15 +50,6 @@ public class NoteService {
         return new NoteDO(noteBE);
     }
 
-    public List<StudentDO> retrieveStudentNotes(Long studentId) {
-        List<StudentBE> foundStudents = this.studentRepository.findAll();
-        List<StudentDO> studentListTOBeReturned = new ArrayList<>();
-
-        foundStudents.forEach(studentBE -> studentListTOBeReturned.add(new StudentDO(studentBE)));
-
-        return studentListTOBeReturned;
-    }
-
     public void deleteStudentNote(Long note) {
         NoteBE noteBE = noteRepository.findById(note).orElseThrow();
         noteRepository.delete(noteBE);
@@ -68,7 +59,12 @@ public class NoteService {
         Optional<NoteBE> optionalNote = noteRepository.findById(noteDO.getId());
 
         optionalNote.ifPresentOrElse(
-                this.noteRepository::save,
+               noteBE -> {
+                   noteBE.setNote(noteDO.getNote());
+                   noteBE.setEditedDate(LocalDate.now().toString());
+                   noteBE.setLastEditedBy("GUESS WHO");
+                   noteRepository.save(noteBE);
+               },
                 () -> {
                     throw new RuntimeException("Note not found with id: " + noteDO.getId());
                 });
