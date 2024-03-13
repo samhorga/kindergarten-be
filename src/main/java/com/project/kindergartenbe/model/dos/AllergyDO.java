@@ -1,17 +1,17 @@
 package com.project.kindergartenbe.model.dos;
 
 import com.project.kindergartenbe.model.be.AllergyBE;
-import com.project.kindergartenbe.util.CommonUtil;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
 @Setter
 public class AllergyDO extends BaseDO{
     private String allergyName;
+
+    public AllergyDO() {}
 
     public AllergyDO (AllergyBE allergyBE) {
         this.allergyName = Objects.nonNull(allergyBE.getAllergyName()) ? allergyBE.getAllergyName() : null;
