@@ -49,19 +49,19 @@ public class AllergyController {
 //        }
 //    }
 //
-//    @PostMapping("/edit")
-//    public ResponseEntity<BaseResponse<NoteDO>> editNote(@RequestBody NoteDO noteDO) {
-//        BaseResponse<NoteDO> response = new BaseResponse<>();
-//        try {
-//            NoteDO editedNote = noteService.editNote(noteDO);
-//            response.setData(editedNote);
-//            response.setSuccess(true);
-//            response.setMessage("Note edited successfully.");
-//            return  ResponseEntity.ok(response);
-//        } catch (Exception e) {
-//            response.setSuccess(false);
-//            response.setMessage("Error occurred while editing note.");
-//            throw e;
-//        }
-//    }
+    @PostMapping("/edit")
+    public ResponseEntity<BaseResponse<AllergyDO>> editAllergy(@RequestBody AllergyDO allergyDO) {
+        BaseResponse<AllergyDO> response = new BaseResponse<>();
+        try {
+            AllergyDO editedAllergy = allergyService.editAllergy(allergyDO);
+            response.setData(editedAllergy);
+            response.setSuccess(true);
+            response.setMessage("Allergy edited successfully.");
+            return  ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while editing allergy.");
+            throw e;
+        }
+    }
 }

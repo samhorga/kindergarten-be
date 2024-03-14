@@ -50,21 +50,21 @@ public class AllergyService {
 //        noteRepository.delete(noteBE);
 //    }
 //
-//    public NoteDO editNote(NoteDO noteDO) {
-//        Optional<NoteBE> optionalNote = noteRepository.findById(noteDO.getId());
-//
-//        optionalNote.ifPresentOrElse(
-//               noteBE -> {
-//                   noteBE.setNote(noteDO.getNote());
-//                   noteBE.setEditedDate(LocalDateTime.now().toString());
-//                   noteBE.setLastEditedBy("GUESS WHO");
-//                   noteRepository.save(noteBE);
-//               },
-//                () -> {
-//                    throw new RuntimeException("Note not found with id: " + noteDO.getId());
-//                });
-//        return new NoteDO(optionalNote.get());
-//    }
+    public AllergyDO editAllergy(AllergyDO allergyDO) {
+        Optional<AllergyBE> optionalAllergy = allergyRepository.findById(allergyDO.getId());
+
+        optionalAllergy.ifPresentOrElse(
+               allergyBE -> {
+                   allergyBE.setAllergyName(allergyDO.getAllergyName());
+                   allergyBE.setEditedDate(LocalDateTime.now().toString());
+                   allergyBE.setLastEditedBy("GUESS WHO");
+                   allergyRepository.save(allergyBE);
+               },
+                () -> {
+                    throw new RuntimeException("Allergy not found with id: " + allergyDO.getId());
+                });
+        return new AllergyDO(optionalAllergy.get());
+    }
 
 //    private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {
 //        foundStudent.setClassroom(studentDO.getClassroom());

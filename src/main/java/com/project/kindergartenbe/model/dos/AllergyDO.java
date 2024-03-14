@@ -10,10 +10,12 @@ import java.util.Objects;
 @Setter
 public class AllergyDO extends BaseDO{
     private String allergyName;
+    private Long id;
 
     public AllergyDO() {}
 
     public AllergyDO (AllergyBE allergyBE) {
+        this.id = allergyBE.getId();
         this.allergyName = Objects.nonNull(allergyBE.getAllergyName()) ? allergyBE.getAllergyName() : null;
         this.createdDate = Objects.nonNull(allergyBE.getCreatedDate()) ? allergyBE.getCreatedDate() : null;
         this.editedDate = Objects.nonNull(allergyBE.getEditedDate()) ? allergyBE.getEditedDate() : null;
