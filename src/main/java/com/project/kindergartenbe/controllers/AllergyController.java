@@ -34,21 +34,21 @@ public class AllergyController {
         }
     }
 
-//    @DeleteMapping("/delete/{noteId}")
-//    public ResponseEntity<BaseResponse<String>> deleteNote(@PathVariable Long noteId) {
-//        BaseResponse<String> response = new BaseResponse<>();
-//        try {
-//            noteService.deleteStudentNote(noteId);
-//            response.setSuccess(true);
-//            response.setMessage("Note deleted successfully.");
-//            return new ResponseEntity<>(response, HttpStatus.OK);
-//        } catch (Exception e) {
-//            response.setSuccess(false);
-//            response.setMessage("Error occurred while deleting note.");
-//            throw e;
-//        }
-//    }
-//
+    @DeleteMapping("/delete/{allergyId}")
+    public ResponseEntity<BaseResponse<String>> deleteAllergy(@PathVariable Long allergyId) {
+        BaseResponse<String> response = new BaseResponse<>();
+        try {
+            allergyService.deleteStudentAllergy(allergyId);
+            response.setSuccess(true);
+            response.setMessage("Allergy deleted successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while deleting Allergy.");
+            throw e;
+        }
+    }
+
     @PostMapping("/edit")
     public ResponseEntity<BaseResponse<AllergyDO>> editAllergy(@RequestBody AllergyDO allergyDO) {
         BaseResponse<AllergyDO> response = new BaseResponse<>();

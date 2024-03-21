@@ -45,11 +45,11 @@ public class AllergyService {
         return new AllergyDO(allergyBE);
     }
 
-//    public void deleteStudentNote(Long note) {
-//        NoteBE noteBE = noteRepository.findById(note).orElseThrow();
-//        noteRepository.delete(noteBE);
-//    }
-//
+    public void deleteStudentAllergy(Long allergyId) {
+        AllergyBE allergyBE = allergyRepository.findById(allergyId).orElseThrow();
+        allergyRepository.delete(allergyBE);
+    }
+
     public AllergyDO editAllergy(AllergyDO allergyDO) {
         Optional<AllergyBE> optionalAllergy = allergyRepository.findById(allergyDO.getId());
 
