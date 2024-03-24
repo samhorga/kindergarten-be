@@ -43,12 +43,7 @@ public class StudentBE extends BaseBE {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<AllergyBE> allergies = new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "student_vaccine",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "vaccine_id")
-    )
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<VaccineBE> vaccines = new HashSet<>();
 
     @ManyToMany

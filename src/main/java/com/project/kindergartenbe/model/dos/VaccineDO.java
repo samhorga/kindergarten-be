@@ -19,11 +19,15 @@ public class VaccineDO extends BaseDO {
     private String vaccineDoses;
     private String vaccineDate;
     private List<StudentDO> students;
+    private Long id;
+
+    public VaccineDO() {}
 
     public VaccineDO (VaccineBE vaccineBE) {
-        this.students = !CollectionUtils.isEmpty(vaccineBE.getStudents()) ?
-                vaccineBE.getStudents().stream().map(StudentDO::new)
-                        .collect(Collectors.toList()) : Collections.emptyList();
+        this.id = vaccineBE.getId();
+        this.vaccineName = vaccineBE.getVaccineName();
+        this.vaccineDoses = vaccineBE.getVaccineDoses();
+        this.vaccineDate = vaccineBE.getVaccineDate();
         this.createdDate = Objects.nonNull(vaccineBE.getCreatedDate()) ? vaccineBE.getCreatedDate() : null;
         this.editedDate = Objects.nonNull(vaccineBE.getEditedDate()) ? vaccineBE.getEditedDate() : null;
         this.lastEditedBy = Objects.nonNull(vaccineBE.getLastEditedBy()) ? vaccineBE.getLastEditedBy() : null;

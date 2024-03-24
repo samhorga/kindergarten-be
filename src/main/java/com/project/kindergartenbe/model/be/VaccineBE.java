@@ -1,20 +1,12 @@
 package com.project.kindergartenbe.model.be;
 
-import com.project.kindergartenbe.model.dos.AllergyDO;
-import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.model.dos.VaccineDO;
 import lombok.*;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "vaccines") // Define the table name
@@ -36,13 +28,11 @@ public class VaccineBE extends BaseBE {
     @Column(name = "vaccine_date")
     private String vaccineDate;
 
-    @ManyToMany(mappedBy = "vaccines")
-    private Set<StudentBE> students = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentBE student;
 
     public VaccineBE (VaccineDO vaccineDO) {
-        this.students = !CollectionUtils.isEmpty(vaccineDO.getStudents()) ?
-                vaccineDO.getStudents().stream().map(StudentBE::new).collect(Collectors.toSet()) :
-                Collections.emptySet();
         this.vaccineName = vaccineDO.getVaccineName();
         this.vaccineDoses = vaccineDO.getVaccineDoses();
         this.vaccineDate = vaccineDO.getVaccineDate();

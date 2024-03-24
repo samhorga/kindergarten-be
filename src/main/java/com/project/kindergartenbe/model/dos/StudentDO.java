@@ -35,9 +35,9 @@ public class StudentDO extends BaseDO {
         this.schedule = studentBE.getSchedule() ;
         this.dateOfBirth = Objects.nonNull(studentBE.getDateOfBirth()) ? studentBE.getDateOfBirth() : null;
         this.notes = Objects.nonNull(studentBE.getNotes()) ? mapNotes(studentBE.getNotes()) : null;
-        this.allergies = Objects.nonNull(studentBE.getNotes()) ? mapAllergies(studentBE.getAllergies()) : null;;
-        this.vaccines = Objects.nonNull(studentBE.getVaccines()) ? mapVaccines(studentBE.getVaccines()) : null;;
-        this.adults = Objects.nonNull(studentBE.getVaccines()) ? mapAdults(studentBE.getAdults()) : null;;
+        this.allergies = Objects.nonNull(studentBE.getAllergies()) ? mapAllergies(studentBE.getAllergies()) : null;
+        this.vaccines = Objects.nonNull(studentBE.getVaccines()) ? mapVaccines(studentBE.getVaccines()) : null;
+        this.adults = Objects.nonNull(studentBE.getAdults()) ? mapAdults(studentBE.getAdults()) : null;
     }
 
     private List<AdultDO> mapAdults(List<AdultBE> adults) {
