@@ -52,36 +52,22 @@ public class VaccineService {
         VaccineBE vaccineBE = vaccineRepository.findById(vaccineID).orElseThrow();
         vaccineRepository.delete(vaccineBE);
     }
-//V
-//    public AllergyDO editAllergy(AllergyDO allergyDO) {
-//        Optional<AllergyBE> optionalAllergy = allergyRepository.findById(allergyDO.getId());
-//
-//        optionalAllergy.ifPresentOrElse(
-//               allergyBE -> {
-//                   allergyBE.setAllergyName(allergyDO.getAllergyName());
-//                   allergyBE.setEditedDate(LocalDateTime.now().toString());
-//                   allergyBE.setLastEditedBy("GUESS WHO");
-//                   allergyRepository.save(allergyBE);
-//               },
-//                () -> {
-//                    throw new RuntimeException("Allergy not found with id: " + allergyDO.getId());
-//                });
-//        return new AllergyDO(optionalAllergy.get());
-//    }
 
-//    private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {
-//        foundStudent.setClassroom(studentDO.getClassroom());
-//        foundStudent.setDateOfBirth(studentDO.getDateOfBirth());
-//        foundStudent.setFirstName(studentDO.getFirstName());
-//        foundStudent.setLastName(studentDO.getLastName());
-//        foundStudent.setSchedule(studentDO.getSchedule());
-//        foundStudent.setLastEditedBy(studentDO.getLastEditedBy());
-//        foundStudent.setEditedDate(studentDO.getEditedDate());
-//        foundStudent.setAdults(commonMapper.mapAdultsDOtoAdultsBE(studentDO.getAdults()));
-//        foundStudent.setAllergies(commonMapper.mapAllergiesDOtoAllergiesBE(studentDO.getAllergies()));
-//        foundStudent.setNotes(commonMapper.mapNotesDOtoNotesBE(studentDO.getNotes()));
-//        foundStudent.setVaccines(commonMapper.mapVaccinesDOtoVaccinesBE(studentDO.getVaccines()));
-//
-//        return foundStudent;
-//    }
+    public VaccineDO editVaccine(VaccineDO vaccineDO) {
+        Optional<VaccineBE> optionalVaccine = vaccineRepository.findById(vaccineDO.getId());
+
+        optionalVaccine.ifPresentOrElse(
+                vaccineBE -> {
+                    vaccineBE.setVaccineName(vaccineDO.getVaccineName());
+                    vaccineBE.setVaccineDoses(vaccineDO.getVaccineDoses());
+                    vaccineBE.setVaccineDate(vaccineDO.getVaccineDate());
+                    vaccineBE.setEditedDate(LocalDateTime.now().toString());
+                    vaccineBE.setLastEditedBy("GUESS WHO");
+                    vaccineRepository.save(vaccineBE);
+                },
+                () -> {
+                    throw new RuntimeException("Vaccine not found with id: " + vaccineDO.getId());
+                });
+        return new VaccineDO(optionalVaccine.get());
+    }
 }
