@@ -36,22 +36,22 @@ public class VaccineController {
             throw e;
         }
     }
-}
 
-//    @DeleteMapping("/delete/{allergyId}")
-//    public ResponseEntity<BaseResponse<String>> deleteAllergy(@PathVariable Long allergyId) {
-//        BaseResponse<String> response = new BaseResponse<>();
-//        try {
-//            allergyService.deleteStudentAllergy(allergyId);
-//            response.setSuccess(true);
-//            response.setMessage("Allergy deleted successfully.");
-//            return new ResponseEntity<>(response, HttpStatus.OK);
-//        } catch (Exception e) {
-//            response.setSuccess(false);
-//            response.setMessage("Error occurred while deleting Allergy.");
-//            throw e;
-//        }
-//    }
+    @DeleteMapping("/delete/{vaccineId}")
+    public ResponseEntity<BaseResponse<String>> deleteVaccine(@PathVariable Long vaccineId) {
+        BaseResponse<String> response = new BaseResponse<>();
+        try {
+            vaccineService.deleteStudentVaccine(vaccineId);
+            response.setSuccess(true);
+            response.setMessage("Vaccine deleted successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while deleting Vaccine.");
+            throw e;
+        }
+    }
+}
 
 //    @PostMapping("/edit")
 //    public ResponseEntity<BaseResponse<AllergyDO>> editAllergy(@RequestBody AllergyDO allergyDO) {

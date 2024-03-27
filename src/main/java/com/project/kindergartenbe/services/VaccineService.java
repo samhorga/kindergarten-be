@@ -48,11 +48,11 @@ public class VaccineService {
         return new VaccineDO(vaccineBE);
     }
 
-//    public void deleteStudentAllergy(Long allergyId) {
-//        AllergyBE allergyBE = allergyRepository.findById(allergyId).orElseThrow();
-//        allergyRepository.delete(allergyBE);
-//    }
-//
+    public void deleteStudentVaccine(Long vaccineID) {
+        VaccineBE vaccineBE = vaccineRepository.findById(vaccineID).orElseThrow();
+        vaccineRepository.delete(vaccineBE);
+    }
+//V
 //    public AllergyDO editAllergy(AllergyDO allergyDO) {
 //        Optional<AllergyBE> optionalAllergy = allergyRepository.findById(allergyDO.getId());
 //
