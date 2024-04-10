@@ -53,21 +53,28 @@ public class AdultService {
 //        allergyRepository.delete(allergyBE);
 //    }
 //
-//    public AllergyDO editAllergy(AllergyDO allergyDO) {
-//        Optional<AllergyBE> optionalAllergy = allergyRepository.findById(allergyDO.getId());
-//
-//        optionalAllergy.ifPresentOrElse(
-//               allergyBE -> {
-//                   allergyBE.setAllergyName(allergyDO.getAllergyName());
-//                   allergyBE.setEditedDate(LocalDateTime.now().toString());
-//                   allergyBE.setLastEditedBy("GUESS WHO");
-//                   allergyRepository.save(allergyBE);
-//               },
-//                () -> {
-//                    throw new RuntimeException("Allergy not found with id: " + allergyDO.getId());
-//                });
-//        return new AllergyDO(optionalAllergy.get());
-//    }
+    public AdultDO editAdult(AdultDO adultDO) {
+        Optional<AdultBE> optionalAdult = adultRepository.findById(adultDO.getId());
+
+        optionalAdult.ifPresentOrElse(
+               adultBE -> {
+                   adultBE.setEmail(adultDO.getEmail());
+                   adultBE.setFirstName(adultDO.getFirstName());
+                   adultBE.setLastName(adultDO.getLastName());
+                   adultBE.setEmail(adultDO.getEmail());
+                   adultBE.setIsAuthorizedForPickup(adultDO.getIsAuthorizedForPickup());
+                   adultBE.setPhoneNumber(adultDO.getPhoneNumber());
+                   adultBE.setRelationship(adultDO.getRelationship());
+                   adultBE.setPrimary(adultDO.getPrimary());
+                   adultBE.setEditedDate(LocalDateTime.now().toString());
+                   adultBE.setLastEditedBy("GUESS WHO");
+                   adultRepository.save(adultBE);
+               },
+                () -> {
+                    throw new RuntimeException("Allergy not found with id: " + adultDO.getId());
+                });
+        return new AdultDO(optionalAdult.get());
+    }
 
 //    private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {
 //        foundStudent.setClassroom(studentDO.getClassroom());

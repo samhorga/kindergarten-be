@@ -51,19 +51,19 @@ public class AdultController {
 //        }
 //    }
 //
-//    @PostMapping("/edit")
-//    public ResponseEntity<BaseResponse<AllergyDO>> editAllergy(@RequestBody AllergyDO allergyDO) {
-//        BaseResponse<AllergyDO> response = new BaseResponse<>();
-//        try {
-//            AllergyDO editedAllergy = allergyService.editAllergy(allergyDO);
-//            response.setData(editedAllergy);
-//            response.setSuccess(true);
-//            response.setMessage("Allergy edited successfully.");
-//            return  ResponseEntity.ok(response);
-//        } catch (Exception e) {
-//            response.setSuccess(false);
-//            response.setMessage("Error occurred while editing allergy.");
-//            throw e;
-//        }
-//    }
+    @PostMapping("/edit")
+    public ResponseEntity<BaseResponse<AdultDO>> editAdult(@RequestBody AdultDO adultDO) {
+        BaseResponse<AdultDO> response = new BaseResponse<>();
+        try {
+            AdultDO editedAdult = adultService.editAdult(adultDO);
+            response.setData(editedAdult);
+            response.setSuccess(true);
+            response.setMessage("Adult edited successfully.");
+            return  ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while editing adult.");
+            throw e;
+        }
+    }
 }

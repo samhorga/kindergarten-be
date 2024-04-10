@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class AdultDO extends BaseDO {
+    private Long id;
     private String firstName;
     private String lastName;
     private String relationship;
@@ -25,6 +26,7 @@ public class AdultDO extends BaseDO {
     }
 
     public AdultDO(AdultBE adultBE) {
+        this.id = adultBE.getId();
         this.isAuthorizedForPickup = Objects.nonNull(adultBE.getIsAuthorizedForPickup()) ? adultBE.getIsAuthorizedForPickup() : null;
         this.firstName = Objects.nonNull(adultBE.getFirstName()) ? adultBE.getFirstName() : null;
         this.lastName = Objects.nonNull(adultBE.getLastName()) ? adultBE.getLastName() : null;
