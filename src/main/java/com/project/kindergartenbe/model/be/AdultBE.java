@@ -39,10 +39,15 @@ public class AdultBE extends BaseBE {
     @Column(name = "is_primary")
     private Boolean primary;
 
-    @ManyToMany(mappedBy = "adults")
-    private List<StudentBE> students = new ArrayList<>();
+    @Column(name = "isAuthorizedForPickup")
+    private Boolean isAuthorizedForPickup;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentBE student;
 
     public AdultBE(AdultDO adultDO) {
+        this.isAuthorizedForPickup = adultDO.getIsAuthorizedForPickup();
         this.firstName = adultDO.getFirstName();
         this.lastName = adultDO.getLastName();
         this.relationship = adultDO.getRelationship();

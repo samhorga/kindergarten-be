@@ -8,13 +8,14 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class AllergyDO extends BaseDO{
+public class AllergyDO extends BaseDO {
     private String allergyName;
     private Long id;
 
-    public AllergyDO() {}
+    public AllergyDO() {
+    }
 
-    public AllergyDO (AllergyBE allergyBE) {
+    public AllergyDO(AllergyBE allergyBE) {
         this.id = allergyBE.getId();
         this.allergyName = Objects.nonNull(allergyBE.getAllergyName()) ? allergyBE.getAllergyName() : null;
         this.createdDate = Objects.nonNull(allergyBE.getCreatedDate()) ? allergyBE.getCreatedDate() : null;

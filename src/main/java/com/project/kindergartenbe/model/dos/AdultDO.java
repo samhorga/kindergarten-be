@@ -19,9 +19,13 @@ public class AdultDO extends BaseDO {
     private String email;
     private Boolean primary;
     private List<StudentDO> students = new ArrayList<>();
+    private Boolean isAuthorizedForPickup;
+
+    public AdultDO() {
+    }
 
     public AdultDO(AdultBE adultBE) {
-        this.students = adultBE.getStudents().stream().map(StudentDO::new).collect(Collectors.toList());
+        this.isAuthorizedForPickup = Objects.nonNull(adultBE.getIsAuthorizedForPickup()) ? adultBE.getIsAuthorizedForPickup() : null;
         this.firstName = Objects.nonNull(adultBE.getFirstName()) ? adultBE.getFirstName() : null;
         this.lastName = Objects.nonNull(adultBE.getLastName()) ? adultBE.getLastName() : null;
         this.relationship =Objects.nonNull(adultBE.getRelationship()) ? adultBE.getRelationship() : null;

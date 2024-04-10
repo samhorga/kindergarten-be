@@ -1,9 +1,6 @@
 package com.project.kindergartenbe.model.be;
 
-import com.project.kindergartenbe.model.dos.AllergyDO;
-import com.project.kindergartenbe.model.dos.NoteDO;
-import com.project.kindergartenbe.model.dos.StudentDO;
-import com.project.kindergartenbe.model.dos.VaccineDO;
+import com.project.kindergartenbe.model.dos.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,12 +43,7 @@ public class StudentBE extends BaseBE {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<VaccineBE> vaccines = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "student_adults",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "adult_id")
-    )
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<AdultBE> adults = new ArrayList<>();
 
     public StudentBE(StudentDO studentDO) {
@@ -61,8 +53,9 @@ public class StudentBE extends BaseBE {
         this.schedule = studentDO.getSchedule() ;
         this.dateOfBirth = Objects.nonNull(studentDO.getDateOfBirth()) ? studentDO.getDateOfBirth() : null;
         this.notes = Objects.nonNull(studentDO.getNotes()) ? mapNotes(studentDO.getNotes()) : null;
-        this.allergies = Objects.nonNull(studentDO.getNotes()) ? mapAllergies(studentDO.getAllergies()) : null;;
-        this.vaccines = Objects.nonNull(studentDO.getVaccines()) ? mapVaccines(studentDO.getVaccines()) : null;;
+        this.allergies = Objects.nonNull(studentDO.getNotes()) ? mapAllergies(studentDO.getAllergies()) : null;
+        this.vaccines = Objects.nonNull(studentDO.getVaccines()) ? mapVaccines(studentDO.getVaccines()) : null;
+        this.adults = Objects.nonNull(studentDO.getAdults()) ? mapAdults(studentDO.getAdults()) : null;
     }
 
     private List<NoteBE> mapNotes(List<NoteDO> noteDOList) {
@@ -81,5 +74,11 @@ public class StudentBE extends BaseBE {
         return vaccineDOList.stream()
                 .map(VaccineBE::new) // Assuming NoteBE has a constructor that takes NoteDO
                 .collect(Collectors.toSet());
+    }
+
+    private List<AdultBE> mapAdults(List<AdultDO> adultDOS) {
+        return adultDOS.stream()
+                .map(AdultBE::new)
+                .collect(Collectors.toList());
     }
 }
