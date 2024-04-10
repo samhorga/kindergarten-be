@@ -1,12 +1,9 @@
 package com.project.kindergartenbe.services;
 
 import com.project.kindergartenbe.model.be.AdultBE;
-import com.project.kindergartenbe.model.be.AllergyBE;
 import com.project.kindergartenbe.model.be.StudentBE;
 import com.project.kindergartenbe.model.dos.AdultDO;
-import com.project.kindergartenbe.model.dos.AllergyDO;
 import com.project.kindergartenbe.repositories.AdultRepository;
-import com.project.kindergartenbe.repositories.AllergyRepository;
 import com.project.kindergartenbe.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -57,21 +54,21 @@ public class AdultService {
         Optional<AdultBE> optionalAdult = adultRepository.findById(adultDO.getId());
 
         optionalAdult.ifPresentOrElse(
-               adultBE -> {
-                   adultBE.setEmail(adultDO.getEmail());
-                   adultBE.setFirstName(adultDO.getFirstName());
-                   adultBE.setLastName(adultDO.getLastName());
-                   adultBE.setEmail(adultDO.getEmail());
-                   adultBE.setIsAuthorizedForPickup(adultDO.getIsAuthorizedForPickup());
-                   adultBE.setPhoneNumber(adultDO.getPhoneNumber());
-                   adultBE.setRelationship(adultDO.getRelationship());
-                   adultBE.setPrimary(adultDO.getPrimary());
-                   adultBE.setEditedDate(LocalDateTime.now().toString());
-                   adultBE.setLastEditedBy("GUESS WHO");
-                   adultRepository.save(adultBE);
-               },
+                adultBE -> {
+                    adultBE.setEmail(adultDO.getEmail());
+                    adultBE.setFirstName(adultDO.getFirstName());
+                    adultBE.setLastName(adultDO.getLastName());
+                    adultBE.setEmail(adultDO.getEmail());
+                    adultBE.setIsAuthorizedForPickup(adultDO.getIsAuthorizedForPickup());
+                    adultBE.setPhoneNumber(adultDO.getPhoneNumber());
+                    adultBE.setRelationship(adultDO.getRelationship());
+                    adultBE.setPrimary(adultDO.getPrimary());
+                    adultBE.setEditedDate(LocalDateTime.now().toString());
+                    adultBE.setLastEditedBy("GUESS WHO");
+                    adultRepository.save(adultBE);
+                },
                 () -> {
-                    throw new RuntimeException("Allergy not found with id: " + adultDO.getId());
+                    throw new RuntimeException("Adult not found with id: " + adultDO.getId());
                 });
         return new AdultDO(optionalAdult.get());
     }
