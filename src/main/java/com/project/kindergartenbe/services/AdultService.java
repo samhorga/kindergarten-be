@@ -48,11 +48,11 @@ public class AdultService {
         return new AdultDO(adultBE);
     }
 
-//    public void deleteStudentAllergy(Long allergyId) {
-//        AllergyBE allergyBE = allergyRepository.findById(allergyId).orElseThrow();
-//        allergyRepository.delete(allergyBE);
-//    }
-//
+    public void deleteAdult(Long adultId) {
+        AdultBE adultBE = adultRepository.findById(adultId).orElseThrow();
+        adultRepository.delete(adultBE);
+    }
+
     public AdultDO editAdult(AdultDO adultDO) {
         Optional<AdultBE> optionalAdult = adultRepository.findById(adultDO.getId());
 
@@ -75,20 +75,4 @@ public class AdultService {
                 });
         return new AdultDO(optionalAdult.get());
     }
-
-//    private StudentBE convertToBusinessEntity(StudentBE foundStudent, StudentDO studentDO) {
-//        foundStudent.setClassroom(studentDO.getClassroom());
-//        foundStudent.setDateOfBirth(studentDO.getDateOfBirth());
-//        foundStudent.setFirstName(studentDO.getFirstName());
-//        foundStudent.setLastName(studentDO.getLastName());
-//        foundStudent.setSchedule(studentDO.getSchedule());
-//        foundStudent.setLastEditedBy(studentDO.getLastEditedBy());
-//        foundStudent.setEditedDate(studentDO.getEditedDate());
-//        foundStudent.setAdults(commonMapper.mapAdultsDOtoAdultsBE(studentDO.getAdults()));
-//        foundStudent.setAllergies(commonMapper.mapAllergiesDOtoAllergiesBE(studentDO.getAllergies()));
-//        foundStudent.setNotes(commonMapper.mapNotesDOtoNotesBE(studentDO.getNotes()));
-//        foundStudent.setVaccines(commonMapper.mapVaccinesDOtoVaccinesBE(studentDO.getVaccines()));
-//
-//        return foundStudent;
-//    }
 }

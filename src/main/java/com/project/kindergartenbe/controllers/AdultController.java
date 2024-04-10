@@ -2,9 +2,7 @@ package com.project.kindergartenbe.controllers;
 
 import com.project.kindergartenbe.model.BaseResponse;
 import com.project.kindergartenbe.model.dos.AdultDO;
-import com.project.kindergartenbe.model.dos.AllergyDO;
 import com.project.kindergartenbe.services.AdultService;
-import com.project.kindergartenbe.services.AllergyService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,21 +34,21 @@ public class AdultController {
         }
     }
 
-//    @DeleteMapping("/delete/{allergyId}")
-//    public ResponseEntity<BaseResponse<String>> deleteAllergy(@PathVariable Long allergyId) {
-//        BaseResponse<String> response = new BaseResponse<>();
-//        try {
-//            allergyService.deleteStudentAllergy(allergyId);
-//            response.setSuccess(true);
-//            response.setMessage("Allergy deleted successfully.");
-//            return new ResponseEntity<>(response, HttpStatus.OK);
-//        } catch (Exception e) {
-//            response.setSuccess(false);
-//            response.setMessage("Error occurred while deleting Allergy.");
-//            throw e;
-//        }
-//    }
-//
+    @DeleteMapping("/delete/{adultId}")
+    public ResponseEntity<BaseResponse<String>> deleteAdult(@PathVariable Long adultId) {
+        BaseResponse<String> response = new BaseResponse<>();
+        try {
+            adultService.deleteAdult(adultId);
+            response.setSuccess(true);
+            response.setMessage("Adult deleted successfully.");
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setSuccess(false);
+            response.setMessage("Error occurred while deleting Adult.");
+            throw e;
+        }
+    }
+
     @PostMapping("/edit")
     public ResponseEntity<BaseResponse<AdultDO>> editAdult(@RequestBody AdultDO adultDO) {
         BaseResponse<AdultDO> response = new BaseResponse<>();
