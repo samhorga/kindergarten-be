@@ -39,7 +39,7 @@ public class AdultController {
         }
     }
     @PostMapping("/create/{studentId}")
-    public ResponseEntity<BaseResponse<AdultDO>> createAdult(@RequestBody AdultDO adultDO, @PathVariable Long studentId) {
+    public ResponseEntity<BaseResponse<AdultDO>> createAdult(@RequestBody AdultDO adultDO, @PathVariable String studentId) {
         BaseResponse<AdultDO> response = new BaseResponse<>();
         try {
             AdultDO savedAdult = adultService.createAdult(adultDO, studentId);

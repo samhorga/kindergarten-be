@@ -6,10 +6,12 @@ import com.project.kindergartenbe.model.be.StudentBE;
 import com.project.kindergartenbe.model.dos.AdultDO;
 import com.project.kindergartenbe.repositories.AdultRepository;
 import com.project.kindergartenbe.repositories.StudentRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,7 +28,7 @@ public class AdultService {
     }
 
 
-    public AdultDO createAdult(AdultDO adultDO, Long studentID) {
+    public AdultDO createAdult(AdultDO adultDO, String studentID) {
         // Create an instance of AdultBE from AdultDO
         AdultBE adultBE = new AdultBE(adultDO);
 
@@ -38,24 +40,29 @@ public class AdultService {
         adultBE.setLastEditedBy("SAMUEL HORGA");
 
         // Find the StudentBE by ID
-        Optional<StudentBE> optionalStudentBE = this.studentRepository.findById(studentID);
+        if(!studentID.equalsIgnoreCase("notStudentId")) {
+            Optional<StudentBE> optionalStudentBE = this.studentRepository.findById(Long.valueOf(studentID));
 
-        // Check if the StudentBE exists
-        optionalStudentBE.ifPresentOrElse(
-                studentBE -> {
-                    // Save the AdultBE
-                    this.adultRepository.save(adultBE);
+            // Check if the StudentBE exists
+            optionalStudentBE.ifPresentOrElse(
+                    studentBE -> {
+                        // Save the AdultBE
+                        this.adultRepository.save(adultBE);
 
-                    // Add the AdultBE to the StudentBE's set of adults
-                    studentBE.getAdults().add(adultBE);
+                        // Add the AdultBE to the StudentBE's set of adults
+                        studentBE.getAdults().add(adultBE);
 
-                    // Save the updated StudentBE (to update the relationship)
-                    studentRepository.save(studentBE);
-                },
-                () -> {
-                    // Throw an exception if the StudentBE is not found
-                    throw new RuntimeException("Student not found with id: " + studentID);
-                });
+                        // Save the updated StudentBE (to update the relationship)
+                        studentRepository.save(studentBE);
+                    },
+                    () -> {
+                        // Throw an exception if the StudentBE is not found
+                        throw new RuntimeException("Student not found with id: " + studentID);
+                    });
+        } else {
+            //NEW ADULT CREATION, NOT THROUGH CHILD
+            this.adultRepository.save(adultBE);
+        }
 
         // Return a new AdultDO created from the saved AdultBE
         return new AdultDO(adultBE);
