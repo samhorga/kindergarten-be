@@ -2,6 +2,7 @@ package com.project.kindergartenbe.services;
 
 import com.project.kindergartenbe.mappers.CommonMapper;
 import com.project.kindergartenbe.model.be.AdultBE;
+import com.project.kindergartenbe.model.be.AdultStudentBE;
 import com.project.kindergartenbe.model.be.StudentBE;
 import com.project.kindergartenbe.model.dos.AdultDO;
 import com.project.kindergartenbe.repositories.AdultRepository;
@@ -9,16 +10,23 @@ import com.project.kindergartenbe.repositories.StudentRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class AdultService {
 
     private final AdultRepository adultRepository;
     private final StudentRepository studentRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
 //    private final CommonMapper commonMapper;
 
@@ -69,6 +77,9 @@ public class AdultService {
     }
 
     public void deleteAdult(Long adultId) {
+        String dropConstraintQuery = "DELETE FROM adult_student WHERE adult_id = "+adultId;
+        entityManager.createNativeQuery(dropConstraintQuery).executeUpdate();
+
         AdultBE adultBE = adultRepository.findById(adultId).orElseThrow();
         adultRepository.delete(adultBE);
     }
