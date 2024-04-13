@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "adults") // Define the table name
@@ -42,9 +40,8 @@ public class AdultBE extends BaseBE {
     @Column(name = "isAuthorizedForPickup")
     private Boolean isAuthorizedForPickup;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private StudentBE student;
+    @ManyToMany
+    List<StudentBE> students;
 
     public AdultBE(AdultDO adultDO) {
         this.isAuthorizedForPickup = adultDO.getIsAuthorizedForPickup();

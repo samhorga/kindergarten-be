@@ -32,4 +32,8 @@ public class CommonMapper {
     public Set<VaccineBE> mapVaccinesDOtoVaccinesBE(Set<VaccineDO> vaccines) {
         return Objects.nonNull(vaccines) ? vaccines.stream().map(VaccineBE::new).collect(Collectors.toSet()) : null;
     }
+
+    public List<AdultDO> mapAdultsBEtoAdultsDO(List<AdultBE> adults) {
+        return Objects.nonNull(adults) ? adults.stream().map(AdultDO::new).collect(Collectors.toList()) : null;
+    }
 }

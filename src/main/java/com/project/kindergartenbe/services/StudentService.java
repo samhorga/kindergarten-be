@@ -4,12 +4,12 @@ import com.project.kindergartenbe.mappers.CommonMapper;
 import com.project.kindergartenbe.model.be.StudentBE;
 import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.repositories.StudentRepository;
-import com.project.kindergartenbe.util.CommonUtil;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -71,5 +71,10 @@ public class StudentService {
         foundStudent.setVaccines(commonMapper.mapVaccinesDOtoVaccinesBE(studentDO.getVaccines()));
 
         return foundStudent;
+    }
+
+    public List<StudentDO> retrieveStudentsByAdultId(String adultId) {
+        List<StudentBE> studentBES = this.studentRepository.findStudentsByAdultId(Long.valueOf(adultId));
+        return studentBES.stream().map(StudentDO::new).collect(Collectors.toList());
     }
 }

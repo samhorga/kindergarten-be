@@ -38,7 +38,7 @@ public class StudentController {
     }
 
     @GetMapping("/retrieveAllStudents")
-    public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveAllStudents() {
+    public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveAllStudentsBasedOnAdultID() {
         BaseResponse<List<StudentDO>> response = new BaseResponse<>();
         try {
             // Your business logic to fetch or process data
@@ -82,6 +82,24 @@ public class StudentController {
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("Error occurred while editing student.");
+            throw e;
+        }
+    }
+
+    @GetMapping("/retrieveStudents/{adultId}")
+    public ResponseEntity<BaseResponse<List<StudentDO>>> retrieveAllStudentsBasedOnAdultID(@PathVariable String adultId) {
+        BaseResponse<List<StudentDO>> response = new BaseResponse<>();
+        try {
+            // Your business logic to fetch or process data
+            List<StudentDO> studentDOList = studentService.retrieveStudentsByAdultId( adultId);
+            response.setSuccess(true);
+            response.setMessage("Students retrieved successfully.");
+            response.setData(studentDOList);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            response.setSuccess(false);
+            response.setMessage("Error occurred while retrieving students.");
             throw e;
         }
     }

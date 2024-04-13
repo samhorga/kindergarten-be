@@ -2,11 +2,14 @@ package com.project.kindergartenbe.controllers;
 
 import com.project.kindergartenbe.model.BaseResponse;
 import com.project.kindergartenbe.model.dos.AdultDO;
+import com.project.kindergartenbe.model.dos.StudentDO;
 import com.project.kindergartenbe.services.AdultService;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/adult")
@@ -18,6 +21,23 @@ public class AdultController {
         this.adultService = adultService;
     }
 
+    @GetMapping("/retrieveAdults")
+    public ResponseEntity<BaseResponse<List<AdultDO>>> retrieveAllAdults() {
+        BaseResponse<List<AdultDO>> response = new BaseResponse<>();
+        try {
+            // Your business logic to fetch or process data
+            List<AdultDO> adultDOList = adultService.retrieveAdults();
+            response.setSuccess(true);
+            response.setMessage("Adults retrieved successfully.");
+            response.setData(adultDOList);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            response.setSuccess(false);
+            response.setMessage("Error occurred while retrieving adults.");
+            throw e;
+        }
+    }
     @PostMapping("/create/{studentId}")
     public ResponseEntity<BaseResponse<AdultDO>> createAdult(@RequestBody AdultDO adultDO, @PathVariable Long studentId) {
         BaseResponse<AdultDO> response = new BaseResponse<>();

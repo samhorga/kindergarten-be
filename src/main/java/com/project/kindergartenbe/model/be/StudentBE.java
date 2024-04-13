@@ -43,8 +43,12 @@ public class StudentBE extends BaseBE {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<VaccineBE> vaccines = new HashSet<>();
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<AdultBE> adults = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "adult_student",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "adult_id"))
+    List<AdultBE> adults;
 
     public StudentBE(StudentDO studentDO) {
         this.firstName = studentDO.getFirstName();
