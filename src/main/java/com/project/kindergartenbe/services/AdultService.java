@@ -125,7 +125,7 @@ public class AdultService {
 
     public List<AdultDO> retrieveAdults() {
         List<AdultBE> adultsBEs = adultRepository.findAll();
-       // adults.forEach(adultBE -> adultBE.setStudents(studentRepository.findStudentsByAdultId(adultBE.getId())));
+        adultsBEs.forEach(adultBE -> adultBE.setStudents(studentRepository.findStudentsByAdultId(adultBE.getId())));
         List<AdultDO> adultDOList = new CommonMapper().mapAdultsBEtoAdultsDO(adultsBEs);
 
         for(AdultBE adultBE: adultsBEs) {
