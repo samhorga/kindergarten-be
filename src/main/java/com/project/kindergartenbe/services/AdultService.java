@@ -109,7 +109,7 @@ public class AdultService {
 
     public List<AdultDO> retrieveAdults() {
         List<AdultBE> adults = adultRepository.findAll();
-
+       // adults.forEach(adultBE -> adultBE.setStudents(studentRepository.findStudentsByAdultId(adultBE.getId())));
         return new CommonMapper().mapAdultsBEtoAdultsDO(adults);
     }
 }

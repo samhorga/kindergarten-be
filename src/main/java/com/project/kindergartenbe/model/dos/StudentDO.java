@@ -23,7 +23,6 @@ public class StudentDO extends BaseDO {
     private List<AllergyDO> allergies;
     private Set<VaccineDO> vaccines;
     private List<AdultDO> adults;
-    private Set<StudentBE> students = new HashSet<>();
 
     public StudentDO(StudentBE studentBE) {
         this.id = studentBE.getId();

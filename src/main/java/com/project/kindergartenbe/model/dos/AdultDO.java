@@ -39,10 +39,10 @@ public class AdultDO extends BaseDO {
         this.editedDate = Objects.nonNull(adultBE.getEditedDate()) ? adultBE.getEditedDate() : null;
         this.lastEditedBy = Objects.nonNull(adultBE.getLastEditedBy()) ? adultBE.getLastEditedBy() : null;
         this.createdBy = Objects.nonNull(adultBE.getCreatedBy()) ? adultBE.getCreatedBy() : null;
-        this.students = Objects.nonNull(adultBE.getStudents()) ? mapStudents(adultBE.getStudents()) : null;
+//        this.students = Objects.nonNull(adultBE.getStudents()) ? mapStudents(adultBE.getStudents()) : null;
     }
 
-    private List<StudentDO> mapStudents(List<StudentBE> students) {
-        return students.stream().map(StudentDO::new).collect(Collectors.toList());
-    }
+//    private List<StudentDO> mapStudents(List<StudentBE> students) {
+//        return students.stream().map(StudentDO::new).collect(Collectors.toList());
+//    }
 }
