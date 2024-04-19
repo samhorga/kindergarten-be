@@ -134,6 +134,7 @@ public class AdultService {
                         if(adultBE.getId()==adultDO.getId()){
                             StudentDO studentDO = new StudentDO();
 
+                            studentDO.setId(studentBE.getId());
                             studentDO.setCreatedBy(studentBE.getCreatedBy());
                             studentDO.setClassroom(studentBE.getClassroom());
                             studentDO.setDateOfBirth(studentBE.getDateOfBirth());
@@ -146,6 +147,7 @@ public class AdultService {
                             studentDO.setAllergies(studentBE.getAllergies().stream().map(AllergyDO::new).collect(Collectors.toList()));
                             studentDO.setNotes(studentBE.getNotes().stream().map(NoteDO::new).collect(Collectors.toList()));
                             studentDO.setVaccines(studentBE.getVaccines().stream().map(VaccineDO::new).collect(Collectors.toSet()));
+                            studentDO.setAdults(new CommonMapper().mapAdultsBEtoAdultsDO(studentBE.getAdults()));
 
                             adultDO.getStudents().add(studentDO);
                         }
