@@ -43,6 +43,10 @@ public class StudentBE extends BaseBE {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<VaccineBE> vaccines = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private GroupBE group;
+
     @ManyToMany
     @JoinTable(
             name = "adult_student",
