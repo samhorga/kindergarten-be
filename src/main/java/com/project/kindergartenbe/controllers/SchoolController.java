@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
@@ -24,15 +26,15 @@ public class SchoolController {
         return new ResponseEntity<>(createdSchool, HttpStatus.CREATED);
     }
 
-//    // Endpoint to retrieve all schools
-//    @GetMapping
-//    public ResponseEntity<List<School>> getAllSchools() {
-//        List<School> schools = schoolService.getAllSchools();
-//        if (schools.isEmpty()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        return new ResponseEntity<>(schools, HttpStatus.OK);
-//    }
+    // Endpoint to retrieve all schools
+    @GetMapping
+    public ResponseEntity<List<SchoolDO>> getAllSchools() {
+        List<SchoolDO> schools = schoolService.getAllSchools();
+        if (schools.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(schools, HttpStatus.OK);
+    }
 //
 //    // Endpoint to retrieve a specific school by ID
 //    @GetMapping("/{id}")

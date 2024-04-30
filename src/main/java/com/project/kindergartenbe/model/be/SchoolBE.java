@@ -2,6 +2,7 @@ package com.project.kindergartenbe.model.be;
 
 import com.project.kindergartenbe.model.dos.SchoolDO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Table(name = "schools") // Define the table name
+@NoArgsConstructor
 public class SchoolBE extends BaseBE {
 
     @Id

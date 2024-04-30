@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SchoolService {
 
     private SchoolRepository schoolRepository;
 
-    public SchoolService (SchoolRepository schoolRepository) {
+    public SchoolService(SchoolRepository schoolRepository) {
         this.schoolRepository = schoolRepository;
     }
 
@@ -28,11 +29,13 @@ public class SchoolService {
         SchoolBE createdSchool = schoolRepository.save(schoolBE);
         return new SchoolDO(createdSchool);
     }
+
+    // Method to retrieve all schools
+    public List<SchoolDO> getAllSchools() {
+        List<SchoolBE> schoolBE = schoolRepository.findAll();
+        return schoolBE.stream().map(SchoolDO::new).collect(Collectors.toList());
+    }
 }
-//    // Method to retrieve all schools
-//    public List<SchoolDO> getAllSchools() {
-//        return schoolRepository.findAll();
-//    }
 //
 //    // Method to retrieve a specific school by ID
 //    public SchoolDO getSchoolById(Long id) {
