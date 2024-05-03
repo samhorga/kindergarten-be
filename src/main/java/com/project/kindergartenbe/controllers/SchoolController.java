@@ -46,15 +46,15 @@ public class SchoolController {
 //        return new ResponseEntity<>(school, HttpStatus.OK);
 //    }
 //
-//    // Endpoint to update an existing school
-//    @PutMapping("/{id}")
-//    public ResponseEntity<School> updateSchool(@PathVariable Long id, @RequestBody School school) {
-//        School updatedSchool = schoolService.updateSchool(id, school);
-//        if (updatedSchool == null) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(updatedSchool, HttpStatus.OK);
-//    }
+    // Endpoint to update an existing school
+    @PutMapping("/{id}")
+    public ResponseEntity<SchoolDO> updateSchool(@PathVariable Long id, @RequestBody SchoolDO school) {
+        SchoolDO updatedSchool = schoolService.updateSchool(id, school);
+        if (updatedSchool == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(updatedSchool, HttpStatus.OK);
+    }
 //
 //    // Endpoint to delete a school by ID
 //    @DeleteMapping("/{id}")
