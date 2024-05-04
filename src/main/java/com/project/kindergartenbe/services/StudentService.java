@@ -24,7 +24,7 @@ public class StudentService {
     }
 
 
-    public void createStudent(StudentDO studentDO) {
+    public StudentDO createStudent(StudentDO studentDO) {
         StudentBE studentBE = new StudentBE(studentDO);
 
         studentBE.setCreatedDate(LocalDate.now().toString());
@@ -32,6 +32,8 @@ public class StudentService {
         studentBE.setCreatedBy("SAMUEL HORGA");
         studentBE.setLastEditedBy("SAMUEL HORGA");
         this.studentRepository.save(studentBE);
+
+        return new StudentDO(studentBE);
     }
 
     public List<StudentDO> retrieveStudents() {

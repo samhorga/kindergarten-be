@@ -22,11 +22,12 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BaseResponse<String>> createStudent(@RequestBody StudentDO studentDO) {
-        BaseResponse<String> response = new BaseResponse<>();
+    public ResponseEntity<BaseResponse<StudentDO>> createStudent(@RequestBody StudentDO studentDO) {
+        BaseResponse<StudentDO> response = new BaseResponse<>();
         try {
             // Your business logic to fetch or process data
-            studentService.createStudent(studentDO);
+            StudentDO createdStudent = studentService.createStudent(studentDO);
+            response.setData(createdStudent);
             response.setSuccess(true);
             response.setMessage("Student added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -78,7 +79,7 @@ public class StudentController {
             response.setData(editedStudent);
             response.setSuccess(true);
             response.setMessage("Student edited successfully.");
-            return  ResponseEntity.ok(response);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.setSuccess(false);
             response.setMessage("Error occurred while editing student.");
@@ -91,7 +92,7 @@ public class StudentController {
         BaseResponse<List<StudentDO>> response = new BaseResponse<>();
         try {
             // Your business logic to fetch or process data
-            List<StudentDO> studentDOList = studentService.retrieveStudentsByAdultId( adultId);
+            List<StudentDO> studentDOList = studentService.retrieveStudentsByAdultId(adultId);
             response.setSuccess(true);
             response.setMessage("Students retrieved successfully.");
             response.setData(studentDOList);
