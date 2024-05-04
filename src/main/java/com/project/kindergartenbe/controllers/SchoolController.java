@@ -55,14 +55,14 @@ public class SchoolController {
         }
         return new ResponseEntity<>(updatedSchool, HttpStatus.OK);
     }
-//
-//    // Endpoint to delete a school by ID
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteSchool(@PathVariable Long id) {
-//        boolean deleted = schoolService.deleteSchool(id);
-//        if (!deleted) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//    }
+
+    // Endpoint to delete a school by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchool(@PathVariable Long id) {
+        boolean deleted = schoolService.deleteSchool(id);
+        if (!deleted) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

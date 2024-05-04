@@ -4,6 +4,7 @@ import com.project.kindergartenbe.model.be.SchoolBE;
 import com.project.kindergartenbe.model.dos.SchoolDO;
 import com.project.kindergartenbe.repositories.SchoolRepository;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -60,15 +61,14 @@ public class SchoolService {
         }
         return null;
     }
+
+    // Method to delete a school by ID
+    public boolean deleteSchool(Long id) {
+        Optional<SchoolBE> optionalSchool = schoolRepository.findById(id);
+        if (optionalSchool.isPresent()) {
+            schoolRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
-//
-//    // Method to delete a school by ID
-//    public boolean deleteSchool(Long id) {
-//        Optional<School> optionalSchool = schoolRepository.findById(id);
-//        if (optionalSchool.isPresent()) {
-//            schoolRepository.deleteById(id);
-//            return true;
-//        }
-//        return false;
-//    }
-//}
