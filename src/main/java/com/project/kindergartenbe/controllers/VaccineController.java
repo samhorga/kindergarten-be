@@ -31,8 +31,6 @@ public class VaccineController {
             response.setMessage("Vaccine added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Exception during adding the vaccine: " + ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -46,8 +44,6 @@ public class VaccineController {
             response.setMessage("Vaccine deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while deleting Vaccine.");
             throw e;
         }
     }
@@ -62,8 +58,6 @@ public class VaccineController {
             response.setMessage("Vaccine edited successfully.");
             return  ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while editing vaccine.");
             throw e;
         }
     }
