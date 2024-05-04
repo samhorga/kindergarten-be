@@ -32,8 +32,6 @@ public class StudentController {
             response.setMessage("Student added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Exception during adding the student: " + ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -49,9 +47,6 @@ public class StudentController {
             response.setData(studentDOList);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // Log the exception for debugging purposes
-            response.setSuccess(false);
-            response.setMessage("Error occurred while retrieving students.");
             throw e;
         }
     }
@@ -65,8 +60,6 @@ public class StudentController {
             response.setMessage("Student deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while deleting student.");
             throw e;
         }
     }
@@ -81,8 +74,6 @@ public class StudentController {
             response.setMessage("Student edited successfully.");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while editing student.");
             throw e;
         }
     }
@@ -98,9 +89,6 @@ public class StudentController {
             response.setData(studentDOList);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // Log the exception for debugging purposes
-            response.setSuccess(false);
-            response.setMessage("Error occurred while retrieving students.");
             throw e;
         }
     }

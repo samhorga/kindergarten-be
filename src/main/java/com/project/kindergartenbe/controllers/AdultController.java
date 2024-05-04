@@ -32,9 +32,6 @@ public class AdultController {
             response.setData(adultDOList);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            // Log the exception for debugging purposes
-            response.setSuccess(false);
-            response.setMessage("Error occurred while retrieving adults.");
             throw e;
         }
     }
@@ -48,8 +45,6 @@ public class AdultController {
             response.setMessage("Adult added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Exception during adding the adult: " + ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -63,8 +58,6 @@ public class AdultController {
             response.setMessage("Adult deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while deleting Adult.");
             throw e;
         }
     }
@@ -79,8 +72,6 @@ public class AdultController {
             response.setMessage("Adult edited successfully.");
             return  ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while editing adult.");
             throw e;
         }
     }

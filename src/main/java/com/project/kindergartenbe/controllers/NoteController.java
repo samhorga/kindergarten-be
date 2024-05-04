@@ -28,8 +28,6 @@ public class NoteController {
             response.setMessage("Note added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Exception during adding the student: " + ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -43,8 +41,6 @@ public class NoteController {
             response.setMessage("Note deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while deleting note.");
             throw e;
         }
     }
@@ -59,8 +55,6 @@ public class NoteController {
             response.setMessage("Note edited successfully.");
             return  ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while editing note.");
             throw e;
         }
     }

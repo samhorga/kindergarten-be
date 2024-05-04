@@ -28,8 +28,6 @@ public class AllergyController {
             response.setMessage("Allergy added successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Exception during adding the allergy: " + ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -43,8 +41,6 @@ public class AllergyController {
             response.setMessage("Allergy deleted successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while deleting Allergy.");
             throw e;
         }
     }
@@ -59,8 +55,6 @@ public class AllergyController {
             response.setMessage("Allergy edited successfully.");
             return  ResponseEntity.ok(response);
         } catch (Exception e) {
-            response.setSuccess(false);
-            response.setMessage("Error occurred while editing allergy.");
             throw e;
         }
     }
