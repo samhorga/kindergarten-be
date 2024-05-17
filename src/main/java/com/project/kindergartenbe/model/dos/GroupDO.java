@@ -20,9 +20,6 @@ public class GroupDO extends BaseDO {
     public GroupDO(GroupBE groupBE) {
         this.id = groupBE.getId();
         this.name = groupBE.getName();
-        if (Objects.nonNull(groupBE.getSchool())) {
-            this.schoolDO = new SchoolDO(groupBE.getSchool());
-        }
         this.createdDate = Objects.nonNull(groupBE.getCreatedDate()) ? groupBE.getCreatedDate() : null;
         this.editedDate = Objects.nonNull(groupBE.getEditedDate()) ? groupBE.getEditedDate() : null;
         this.lastEditedBy = Objects.nonNull(groupBE.getLastEditedBy()) ? groupBE.getLastEditedBy() : null;

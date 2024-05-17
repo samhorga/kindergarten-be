@@ -2,6 +2,7 @@ package com.project.kindergartenbe.model.be;
 
 import com.project.kindergartenbe.model.dos.GroupDO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @Table(name = "groups") // Define the table name
+@NoArgsConstructor
 public class GroupBE extends BaseBE {
 
     @Id
@@ -35,7 +37,6 @@ public class GroupBE extends BaseBE {
         if (Objects.nonNull(groupDO.getSchoolDO())) {
             this.school = new SchoolBE(groupDO.getSchoolDO());
         }
-        this.students = groupDO.getStudents().stream().map(StudentBE::new).collect(Collectors.toList());
         this.createdDate = Objects.nonNull(groupDO.getCreatedDate()) ? groupDO.getCreatedDate() : null;
         this.editedDate = Objects.nonNull(groupDO.getEditedDate()) ? groupDO.getEditedDate() : null;
         this.lastEditedBy = Objects.nonNull(groupDO.getLastEditedBy()) ? groupDO.getLastEditedBy() : null;
